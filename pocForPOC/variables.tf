@@ -93,6 +93,24 @@ variable "log_Workspace_Name" {
   default = "log-jp-23"
 }
 
+### App Services ###
+variable "app_Service_Plan_Name" {
+  description = "The name of the App Service Plan"
+  type        = string
+  default     = "asp-jp-test-24"
+}
+
+variable "app_Services"{
+    type = map(any)
+    default = {
+      app1 = {
+        name = "app-prod-jp-test23"
+      }
+      app2 = {
+        name = "app-prod-jp-test24"
+      }
+    }
+}
 
 
 
