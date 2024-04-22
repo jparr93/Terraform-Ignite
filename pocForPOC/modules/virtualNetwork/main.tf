@@ -25,8 +25,8 @@ resource "azurerm_subnet" "main" {
     address_prefixes = each.value["address_prefixes"]
 }
 
-resource "azurerm_subnet_network_security_group_association" "main" {
-  for_each = azurerm_subnet.main
-  subnet_id                 = each.value.id
-  network_security_group_id = azurerm_network_security_group.main.id
-}
+#resource "azurerm_subnet_network_security_group_association" "main" {
+  #for_each = azurerm_subnet.main 
+  #subnet_id                 = each.value.id
+  #network_security_group_id = azurerm_network_security_group.main.id
+#}

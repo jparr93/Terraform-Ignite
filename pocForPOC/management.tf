@@ -15,12 +15,12 @@ resource "azurerm_log_analytics_workspace" "main" {
   retention_in_days   = 30
 }
 
-# module "app_Service_Default" {
-  #source = "./modules/azureBastion"
-#location = azurerm_resource_group.management.location
-#resource_Group_Name = azurerm_resource_group.management.name
-#bastion_Host_Name =  var.bastion_Host_Name
-#bastion_Host_Config = var.bastion_Host_Config
-#bastion_Host_Public_Ip_Name = var.bastion_Host_Public_Ip_Name
-#bastion_Host_Subnet_Id = ""
-#}
+ module "azure_Bastion_Default" {
+  source = "./modules/azureBastion"
+location = azurerm_resource_group.management.location
+resource_Group_Name = azurerm_resource_group.management.name
+bastion_Host_Name =  var.bastion_Host_Name
+bastion_Host_Config = var.bastion_Host_Config
+bastion_Host_Public_Ip_Name = var.bastion_Host_Public_Ip_Name
+bastion_Host_Subnet_Id = "${module.virtual_network_default.virtual_network.id}/subnets/AzureBastionSubnet"
+}

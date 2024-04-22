@@ -39,6 +39,10 @@ variable "subnets_default"{
         name = "subnet2"
         address_prefixes = ["10.1.2.0/24"]
       }
+      subnet3 = {
+        name = "AzureBastionSubnet"
+        address_prefixes = ["10.1.3.0/24"]
+      }
     }
 }
 
@@ -157,6 +161,22 @@ variable "service_Bus_Queues"{
     }
 }
 
+### Azure Bastion Host ###
 
+variable "bastion_Host_Name" {
+  description = "The name of the Bastion Host"
+  type        = string
+  default     = "bst-uks-prd-jp"
+}
 
+variable "bastion_Host_Config" {
+  description = "The config name for Azure Bastion"
+  type        = string
+  default     = "defaultconfig"
+}
 
+variable "bastion_Host_Public_Ip_Name" {
+  description = "The name of the PIP for Bastion"
+  type        = string
+  default     = "pip-bst-uks-prd-jp-01"
+}
