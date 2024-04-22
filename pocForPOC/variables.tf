@@ -112,5 +112,51 @@ variable "app_Services"{
     }
 }
 
+### Service Bus ###
+variable "service_Bus_Name" {
+  description = "The name of the Service Bus"
+  type        = string
+  default     = "sb-jp-prd-uks-01"
+}
+
+variable "service_Bus_Sku" {
+  description = "The sku of the Service Bus"
+  type        = string
+  default     = "Standard"
+}
+
+variable "service_Bus_Topics"{
+    type = map(any)
+    default = {
+      topic1 = {
+        name = "sbtop1"
+        enable_partitioning = false
+        max_size_in_megabytes = "2048"
+        supports_ordering = false
+      }
+      topic2 = {
+        name = "sbtop2"
+        enable_partitioning = true
+        max_size_in_megabytes = "2048"
+        supports_ordering = true
+      }
+    }
+}
+
+variable "service_Bus_Queues"{
+    type = map(any)
+    default = {
+      topic1 = {
+        name = "sbq1"
+        enable_partitioning = false
+      }
+      topic2 = {
+        name = "sbq2"
+        enable_partitioning = true
+      }
+    }
+}
+
+
 
 
