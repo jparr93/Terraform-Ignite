@@ -5,5 +5,5 @@ managementResourceGroup = {
 
 networksResourceGroup = {
   location = "Uk South"
-  name = "networks"
+  name = "network"
 }
