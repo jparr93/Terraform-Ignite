@@ -7,5 +7,5 @@ resource "azurerm_storage_account" "main" {
   account_kind = var.account_kind
   access_tier = var.access_tier
 
-  tags = {}
+  tags = var.tags
 }

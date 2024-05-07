@@ -1,3 +1,7 @@
+variable "tags" {
+  description = "Tags for infrastructure resources."
+  type        = map
+}
 variable "location" {
   description = "The location of created resources."
   type        = string
