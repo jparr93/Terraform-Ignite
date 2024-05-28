@@ -31,3 +31,12 @@ resource "azurerm_virtual_network_peering" "default_to_peered" {
   virtual_network_name      = module.virtual_network_default.virtual_network.name
   remote_virtual_network_id = module.virtual_network_peered.virtual_network.id
 }
+
+module "vwan_hub" {
+  source = "./modules/vwanHub"
+location = azurerm_resource_group.networks.location
+resource_Group_Name = azurerm_resource_group.networks.name
+vwan_Name = "vwan1"
+vwan_Hub_Name = "vwanhub1"
+vwan_Hub_Address_Prefix = "10.10.20.0/24"
+}
