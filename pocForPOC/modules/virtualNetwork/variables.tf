@@ -32,6 +32,12 @@ variable "network_Security_Group_Name" {
   default     = "nsg1"
 }
 
+variable "route_table_name" {
+  description = "The name of the VNET"
+  type        = string
+  default     = "nsg1"
+}
+
 variable "address_Space" {
   description = "The name of the VNET"
   type        = list

@@ -39,10 +39,6 @@ variable "subnets_default"{
         name = "subnet2"
         address_prefixes = ["10.1.2.0/24"]
       }
-      subnet3 = {
-        name = "AzureBastionSubnet"
-        address_prefixes = ["10.1.3.0/24"]
-      }
     }
 }
 
@@ -104,16 +100,11 @@ variable "app_Service_Plan_Name" {
   default     = "asp-jp-test-24"
 }
 
-variable "app_Services"{
-    type = map(any)
-    default = {
-      app1 = {
-        name = "app-prod-jp-test23"
-      }
-      app2 = {
-        name = "app-prod-jp-test24"
-      }
-    }
+variable "apps" {
+  type = list(object({
+    name = string
+  }))
+  default = []
 }
 
 ### Service Bus ###
@@ -130,35 +121,19 @@ variable "service_Bus_Sku" {
 }
 
 variable "service_Bus_Topics"{
-    type = map(any)
-    default = {
-      topic1 = {
-        name = "sbtop1"
-        enable_partitioning = false
-        max_size_in_megabytes = "2048"
-        supports_ordering = false
-      }
-      topic2 = {
-        name = "sbtop2"
-        enable_partitioning = true
-        max_size_in_megabytes = "2048"
-        supports_ordering = true
-      }
-    }
+    type = list(object({
+        name = string
+        enable_partitioning = bool
+        max_size_in_megabytes = string
+        supports_ordering = bool
+    }))
 }
 
 variable "service_Bus_Queues"{
-    type = map(any)
-    default = {
-      topic1 = {
-        name = "sbq1"
-        enable_partitioning = false
-      }
-      topic2 = {
-        name = "sbq2"
-        enable_partitioning = true
-      }
-    }
+ type = list(object({
+        name = string
+        enable_partitioning = bool
+    }))
 }
 
 ### Azure Bastion Host ###
@@ -179,4 +154,48 @@ variable "bastion_Host_Public_Ip_Name" {
   description = "The name of the PIP for Bastion"
   type        = string
   default     = "pip-bst-uks-prd-jp-01"
+}
+
+###  SQL Server ###
+variable "sql_Server" {
+  description = "Object detailing the SQL Server, if creating one"
+    type = object({
+        name        = string
+        version     = string
+    })
+}
+
+variable "databases"{
+    type = list(object({
+    name = string
+    edition = string
+    collation = string
+  }))
+}
+
+variable "administrator_login" {
+  type = string
+  default = "adminjoe"
+}
+
+variable "administrator_login_password" {
+  type = string
+  sensitive = true
+  default = "P@55w0rd!!!!!"
+}
+
+### Sql managed instance ###
+variable "instance_Config" {
+    description = "Object detailing the SQL Server managed instance, if creating one"
+    type = object({
+        create              = optional(bool, true)
+        id                  = optional(string)
+        name                = optional(string)
+        license_type        = optional(string)
+        sku_name            = optional(string)
+        storage_size_in_gb  = optional(number)
+        subnet_name         = optional(string)
+        virtual_network_id  = optional(string)
+        vcores              = optional(number)
+    })
 }

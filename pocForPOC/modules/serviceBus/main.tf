@@ -10,20 +10,20 @@ resource "azurerm_servicebus_namespace" "main" {
 }
 
 resource "azurerm_servicebus_queue" "main" {
-  for_each = var.queues
-  name         = each.value["name"]
+  for_each = { for each in var.queues : each.name => each }
+  name         = each.value.name
   namespace_id = azurerm_servicebus_namespace.main.id
 
-   enable_partitioning = each.value["enable_partitioning"]
+   enable_partitioning = each.value.enable_partitioning
 
 }
  
 resource "azurerm_servicebus_topic" "example" {
-  for_each = var.topics
-  name         = each.value["name"]
+  for_each = { for each in var.topics : each.name => each }
+  name         = each.value.name
   namespace_id = azurerm_servicebus_namespace.main.id
 
-  enable_partitioning = each.value["enable_partitioning"]
-  max_size_in_megabytes = each.value["max_size_in_megabytes"]
-  support_ordering = each.value["supports_ordering"]
+  enable_partitioning = each.value.enable_partitioning
+  max_size_in_megabytes = each.value.max_size_in_megabytes
+  support_ordering = each.value.supports_ordering
 }
