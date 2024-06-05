@@ -103,6 +103,7 @@ variable "app_Service_Plan_Name" {
 variable "apps" {
   type = list(object({
     name = string
+    app_settings = map(any)
   }))
   default = []
 }

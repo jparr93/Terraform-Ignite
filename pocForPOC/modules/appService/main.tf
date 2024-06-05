@@ -14,4 +14,7 @@ resource "azurerm_app_service" "main" {
   location            = var.location
   resource_group_name = var.resource_Group_Name
   app_service_plan_id = azurerm_service_plan.main.id
+
+   app_settings = each.value.app_settings
 }
+/* app_settings = contains(each.value, "app_settings") ? each.value.app_settings : {}*/

@@ -34,7 +34,7 @@ variable "plan" {
     id             = optional(string)
     name           = optional(string)
     sku_name       = optional(string, "B1")
-    zone_balancing = optional(bool, false)
+    zone_balancing = optional(bool, true)
   })
   default = {}
 }
@@ -42,6 +42,7 @@ variable "plan" {
 variable "apps" {
   type = list(object({
     name = string
+    app_settings = optional(map(any))
   }))
   default = []
 }

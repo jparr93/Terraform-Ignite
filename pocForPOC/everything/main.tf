@@ -1,5 +1,5 @@
 module "virtual_network_default" {
-  source = "./modules/virtualNetwork"
+  source = "../modules/virtualNetwork"
 location = azurerm_resource_group.networks.location
 resource_Group_Name = azurerm_resource_group.networks.name
 virtual_Network_Name = "vnet2"
@@ -10,7 +10,7 @@ route_table_name = "rt2d3"
 }
 
 module "virtual_network_peered" {
-  source = "./modules/virtualNetwork"
+  source = "../modules/virtualNetwork"
 location = azurerm_resource_group.networks.location
 resource_Group_Name = azurerm_resource_group.networks.name
 virtual_Network_Name = "vnet3"
@@ -35,7 +35,7 @@ resource "azurerm_virtual_network_peering" "default_to_peered" {
 }
 
 /*module "vwan_hub" {
-  source = "./modules/vwanHub"
+  source = "../modules/vwanHub"
 location = azurerm_resource_group.networks.location
 resource_Group_Name = azurerm_resource_group.networks.name
 vwan_Name = "vwan1"

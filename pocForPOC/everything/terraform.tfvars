@@ -26,9 +26,11 @@ databases = [ {
 
 apps = [{
   name = "app27jp234"
+  app_settings = {"SOME_KEY" = "some-value"}
   },
   {
   name = "app28jp2334"
+    app_settings = {}
   }
 ]
 
