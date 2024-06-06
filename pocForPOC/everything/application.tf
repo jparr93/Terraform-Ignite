@@ -36,3 +36,4 @@ instance_vnet_id = module.virtual_network_peered.virtual_network.id
 administrator_login =  var.administrator_login
 administrator_login_password = var.administrator_login_password
 }
+

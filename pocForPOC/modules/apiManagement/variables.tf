@@ -15,13 +15,10 @@ variable "apim_config" {
   description = "APIM Configuration"
   type = object({
     name           = optional(string)
-    sku_name       = optional(string, "B1")
-    zone_balancing = optional(bool, true)
     publisher_name = string
     publisher_email = string
     sku_name        = string
   })
-  default = {}
 }
 
 variable "apis" {
@@ -32,5 +29,4 @@ variable "apis" {
     path = string
     protocols = list(any)
   }))
-  default = []
 }
