@@ -30,3 +30,12 @@ variable "apis" {
     protocols = list(any)
   }))
 }
+
+variable "apim_backend" {
+  description = "APIM Backend"
+  type = object({
+    name           = optional(string)
+    protocol = string
+    url = string
+  })
+}

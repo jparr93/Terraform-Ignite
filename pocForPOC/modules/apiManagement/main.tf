@@ -19,3 +19,110 @@ resource "azurerm_api_management_api" "main" {
   path                = each.value.path
   protocols           = each.value.protocols
 }
+
+resource "azurerm_api_management_backend" "main" {
+  name                = var.apim_backend["name"]
+  resource_group_name = var.resource_Group_Name
+  api_management_name = azurerm_api_management.main.name
+  protocol            = var.apim_backend["protocol"]
+  url                 = var.apim_backend["url"]
+}
+
+resource "azapi_resource" "symbolicname" {
+  type = "Microsoft.ApiManagement/service/apis@2023-05-01-preview"
+}
+
+resource "azapi_resource" "symbolicname" {
+  type = "Microsoft.ApiManagement/service/backends@2023-05-01-preview"
+  name = "string"
+  parent_id = "string"
+    body = jsonencode({
+    properties = {
+      circuitBreaker = {
+        rules = [
+          {
+            failureCondition = {
+              count = int
+              errorReasons = [
+                "string"
+              ]
+              interval = "string"
+              percentage = int
+              statusCodeRanges = [
+                {
+                  max = int
+                  min = int
+                }
+              ]
+            }
+            name = "string"
+            tripDuration = "string"
+          }
+        ]
+      }
+      credentials = {
+        authorization = {
+          parameter = "string"
+          scheme = "string"
+        }
+        certificate = [
+          "string"
+        ]
+        certificateIds = [
+          "string"
+        ]
+        header = {
+          {customized property} = [
+            "string"
+          ]
+        }
+        query = {
+          {customized property} = [
+            "string"
+          ]
+        }
+      }
+      description = "string"
+      pool = {
+        services = [
+          {
+            id = "string"
+          }
+        ]
+      }
+      properties = {
+        serviceFabricCluster = {
+          clientCertificateId = "string"
+          clientCertificatethumbprint = "string"
+          managementEndpoints = [
+            "string"
+          ]
+          maxPartitionResolutionRetries = int
+          serverCertificateThumbprints = [
+            "string"
+          ]
+          serverX509Names = [
+            {
+              issuerCertificateThumbprint = "string"
+              name = "string"
+            }
+          ]
+        }
+      }
+      protocol = "string"
+      proxy = {
+        password = "string"
+        url = "string"
+        username = "string"
+      }
+      resourceId = "string"
+      title = "string"
+      tls = {
+        validateCertificateChain = bool
+        validateCertificateName = bool
+      }
+      type = "string"
+      url = "string"
+    }
+  })
+}
