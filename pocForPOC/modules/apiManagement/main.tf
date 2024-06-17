@@ -32,7 +32,7 @@ resource "azapi_resource" "symbolicname" {
   type = "Microsoft.ApiManagement/service/apis@2023-05-01-preview"
 }
 
-resource "azapi_resource" "symbolicname" {
+/*resource "azapi_resource" "symbolicname" {
   type = "Microsoft.ApiManagement/service/backends@2023-05-01-preview"
   name = "string"
   parent_id = "string"
@@ -125,4 +125,4 @@ resource "azapi_resource" "symbolicname" {
       url = "string"
     }
   })
-}
+}*/
