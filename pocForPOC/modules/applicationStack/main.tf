@@ -9,6 +9,7 @@ resource "azurerm_sql_server" "main" {
 }
 
 resource "azurerm_sql_database" "main" {
+    count = var.database["create"] ? 1 : 0
   name                = var.database["name"]
   resource_group_name = var.resource_Group_Name
   location            = var.location
@@ -56,7 +57,7 @@ resource "azurerm_service_plan" "main" {
 }
 
 resource "azurerm_app_service" "main" {
-
+     count = var.database["create"] ? 1 : 0
   name                = var.appService["name"]
   location            = var.location
   resource_group_name = var.resource_Group_Name
@@ -67,7 +68,7 @@ resource "azurerm_app_service" "main" {
 connection_string {
 name  = "AZURE_SQL_CONNECTIONSTRING"
 type  = "SQLAzure"
-value = "Data Source=${azurerm_sql_server.main.name}.database.windows.net,1433;Initial Catalog=${azurerm_sql_database.main.name};User ID=${var.administrator_login};Password=${var.administrator_login_password}"
+value = "Data Source=${azurerm_sql_server.main.name}.database.windows.net,1433;Initial Catalog=${azurerm_sql_database.main[count.index].name};User ID=${var.administrator_login};Password=${var.administrator_login_password}"
   }
 
 storage_account {

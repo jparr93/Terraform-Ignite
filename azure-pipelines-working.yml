@@ -1,0 +1,69 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Plan
+  displayName: 'Terraform Plan'
+  jobs:
+  - job: TerraformPlan
+    displayName: 'Terraform Plan'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
+    - script: |
+        az login --service-principal -u $(appId) -p $(appPw) --tenant $(tenantId)
+        terraform --version
+        terraform init -backend-config="storage_account_name=$(storageAccountName)" -backend-config="container_name=$(containerName)" -backend-config="key=$(key)" -backend-config="access_key=$(accessKey)"
+        terraform plan -out=tfplan
+      displayName: 'Terraform Init and Plan'
+
+- stage: Deploy
+  displayName: 'Terraform Apply'
+  jobs:
+  - job: TerraformApply
+    displayName: 'Terraform Apply'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
+    - script: |
+        az login --service-principal -u $(appId) -p $(appPw) --tenant $(tenantId)
+        terraform --version
+        terraform init -backend-config="storage_account_name=$(storageAccountName)" -backend-config="container_name=$(containerName)" -backend-config="key=$(key)" -backend-config="access_key=$(accessKey)"
+        terraform apply -auto-approve
+      displayName: 'Terraform Init and Apply'
+
+- stage: Pause
+  displayName: 'Pausing Deployment'
+  jobs:
+  - job: PausingDeployment
+    displayName: 'Pausing Deployment'
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: 'start-sleep -seconds 120'
+
+- stage: Destroy
+  displayName: 'Terraform Destroy'
+  jobs:
+  - job: TerraformDestroy
+    displayName: 'Terraform Destroy'
+    steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+
+    - script: |
+        az login --service-principal -u $(appId) -p $(appPw) --tenant $(tenantId)
+        terraform --version
+        terraform init -backend-config="storage_account_name=$(storageAccountName)" -backend-config="container_name=$(containerName)" -backend-config="key=$(key)" -backend-config="access_key=$(accessKey)"
+        terraform plan -out=tfplan
+        terraform destroy -auto-approve
+      displayName: 'Terraform Destroy'

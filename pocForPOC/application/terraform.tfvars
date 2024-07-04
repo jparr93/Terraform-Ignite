@@ -30,7 +30,7 @@ plan = {
 }
 
 appService = {
-  name = "app-jp-23-thf"
+  name = "app-jp-23w-thf"
   appSettings = {
     
   }
@@ -42,12 +42,13 @@ server = {
 }
 
 database = {
+  create = true
   name = "db1"
   edition = "Standard"
   collation = "SQL_LATIN1_GENERAL_CP1_CI_AS"
 }
 
 storageAccount = {
-  name = "sajptesty23"
+  name = "sajptestasdy23"
   shareName = "sharing"
 }

@@ -1,11 +1,11 @@
 resource "azurerm_traffic_manager_profile" "example" {
-  name                   = var.trafficManager["name"]
-  resource_group_name    = azurerm_resource_group.example.name
-  traffic_routing_method = var.trafficManager["routing_Method"]
+  name                   = var.traffic_Manager["name"]
+  resource_group_name    = var.resource_Group_Name
+  traffic_routing_method = var.traffic_Manager["routing_Method"]
 
   dns_config {
-    relative_name = var.trafficManager["name"]
-    ttl           = var.trafficManager["ttl"]
+    relative_name = var.traffic_Manager["name"]
+    ttl           = var.traffic_Manager["ttl"]
   }
 
   monitor_config {

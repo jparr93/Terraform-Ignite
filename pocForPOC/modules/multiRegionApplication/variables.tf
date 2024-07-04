@@ -10,3 +10,16 @@ variable "resource_Group_Name" {
   default     = "rg-networking"
 }
 
+variable "traffic_Manager" {
+  description = "Object detailing the plan, if creating one with this module."
+  type = object({
+    name           = optional(string)
+    ttl            = optional(string)
+    routing_Method = optional(string)
+  })
+  default = {}
+}
+
+variable "traffic_Manager_Endpoint" {
+  
+}

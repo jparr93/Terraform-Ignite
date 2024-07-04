@@ -1,0 +1,27 @@
+trigger:
+- main
+
+name: Deploy Bicep files
+
+parameters:
+- name: azureServiceConnection
+  type: string
+  default: 'joe_poc'
+
+variables:
+  vmImageName: 'ubuntu-latest'
+  templateFile: 'PoC/main.bicep'
+  csmParametersFile: 'PoC/params.json'
+
+pool:
+  vmImage: $(vmImageName)
+
+steps:
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '${{ parameters.azureServiceConnection }}'
+    scriptType: bash
+    scriptLocation: inlineScript
+    useGlobalConfig: false
+    inlineScript: |
+      az deployment create --parameters $(csmParametersFile) --parameters location=UkWest --template-file $(templateFile) --location $(location) --name $(deploymentName)

@@ -134,6 +134,7 @@ variable "administrator_login_password" {
 
 variable "database" {
   type = object({
+    create      = optional(bool, true)
     name = optional(string)
     edition = optional(string)
     collation = optional(string)
