@@ -9,3 +9,9 @@ variable "secret_Name" {
   default = "test"
   type = string
 }
+
+variable "resource_group_name" {
+  description = "Resource group where the key vault is located"
+  default = "test"
+  type = string
+}
